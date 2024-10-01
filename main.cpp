@@ -2,8 +2,5 @@
 
 int main() {
 
-	printf("あああ");
-
-
 	return 0;
 }
