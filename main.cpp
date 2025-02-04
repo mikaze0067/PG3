@@ -1,34 +1,3 @@
-//void MyClass::Update() {
-//
-//	// 関数ポインタのテーブルから関数を実行
-//	(this->*table[index])();
-//
-//	int num;
-//
-//	puts("次の行動へ\n");
-//	scanf_s("%d", &num);
-//
-//	if (num == 0) {
-//		index++;
-//		if (index > 2)
-//			index = 0;
-//	}
-//}
-//
-//
-//
-//int main()
-//{
-//	MyClass my;
-//
-//	while (1) {
-//		my.Update();
-//	}
-//
-//	return 0;
-//}
-//------------------------------------------------------------------------------------------------//
-
 #include <iostream>
 using namespace std;
 
@@ -65,19 +34,13 @@ void MyClass::Update() {
 
 	// 関数ポインタのテーブルから関数を実行
 	(this->*table[index])();
-	int num;
 
-	puts("次の行動へ\n");
-	scanf_s("%d", &num);
-	if (num == 0) {
-		index++;
-		if (index > 2){
-			index = 0;
-		}
-	}
-	else {
-		/*ゼロ以外の入力ならインデックスを更新せずに同じ行動を繰り返す*/
-		scanf_s("%d", &num);
+	cout << "次の状態に移行 (0: はい、 他: いいえ)";
+	int input;
+	cin >> input;
+
+	if (input == 0) {
+		index = (index + 1) % 3;
 	}
 }
 
@@ -93,6 +56,6 @@ int main()
 {
 	MyClass my;
 
-	my.Update();
+	while (1)my.Update();
 	return 0;
 }
