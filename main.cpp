@@ -1,61 +1,36 @@
-#include <iostream>
+#include <cstdio>
 using namespace std;
 
-// 自作クラス
-class MyClass {
+class Animal {
 public:
-
-	void Update();
-	void a();
-	void b();
-	void c();
-
-	// メンバ関数ポインタのテーブル
-	static void (MyClass::* table[])();
-
-private:
-	// メンバ関数ポインタのテーブルを参照するインデックス
-	int index = 0;
-};
-
-void MyClass::a() {
-	cout << "敵の接近！" << endl;
-}
-
-void MyClass::b() {
-	cout << "敵の攻撃！" << endl;
-}
-
-void MyClass::c() {
-	cout << "敵の離脱！" << endl;
-}
-
-void MyClass::Update() {
-
-	// 関数ポインタのテーブルから関数を実行
-	(this->*table[index])();
-
-	cout << "次の状態に移行 (0: はい、 他: いいえ)";
-	int input;
-	cin >> input;
-
-	if (input == 0) {
-		index = (index + 1) % 3;
-	}
-}
-
-// static宣言したメンバ関数ポインタテーブルの実体
-void (MyClass::* MyClass::table[])() = {
-  &MyClass::a,	// インデックス番号0
-  &MyClass::b,	// インデックス番号1
-  &MyClass::c	// インデックス番号2
+    virtual void sound() const = 0;
 };
 
 
-int main()
-{
-	MyClass my;
+class Dog : public Animal {
+public:
+    void sound() const override {
+        printf("イヌ鳴き声：ワン\n");
+    }
+};
 
-	while (1)my.Update();
-	return 0;
+
+class Cat : public Animal {
+public:
+    void sound() const override {
+        printf("ネコ鳴き声:ニャー\n");
+    }
+};
+
+int main() {
+    Animal* animal1 = new Dog();
+    Animal* animal2 = new Cat();
+
+    animal1->sound();
+    animal2->sound();
+
+    delete animal1;
+    delete animal2;
+
+    return 0;
 }
