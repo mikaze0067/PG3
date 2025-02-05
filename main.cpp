@@ -1,36 +1,25 @@
-#include <cstdio>
-using namespace std;
+#include <stdio.h>
+#include "IShape.h"
+#include "Circle.h"
+#include "Rectangle.h"
 
-class Animal {
-public:
-    virtual void sound() const = 0;
-};
+int main(void) {
+
+	IShape* shape[2];
+
+	shape[0] = new Circle;
+	shape[1] = new Rectangle;
+
+	printf("å††ã®åŠå¾„:4\nçŸ­å½¢ã®åº•è¾º:2\nçŸ­å½¢ã®é«˜ã•:3\n");
+
+	for (int i = 0; i < 2; i++)
+		shape[i]->Size();
 
 
-class Dog : public Animal {
-public:
-    void sound() const override {
-        printf("ƒCƒk–Â‚«ºFƒƒ“\n");
-    }
-};
+	printf("\n");
 
+	for (int i = 0; i < 2; i++)
+		shape[i]->Draw();
 
-class Cat : public Animal {
-public:
-    void sound() const override {
-        printf("ƒlƒR–Â‚«º:ƒjƒƒ[\n");
-    }
-};
-
-int main() {
-    Animal* animal1 = new Dog();
-    Animal* animal2 = new Cat();
-
-    animal1->sound();
-    animal2->sound();
-
-    delete animal1;
-    delete animal2;
-
-    return 0;
+	return 0;
 }
